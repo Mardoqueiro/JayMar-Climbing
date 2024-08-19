@@ -133,6 +133,4 @@ class Products {
     
 }
 
-export { 
-    Products
-}
+export { Products}
