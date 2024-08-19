@@ -4,7 +4,7 @@ class Products {
     fetchProducts(req, res) {
         try {
             const strQry = `
-            SELECT productID, prodName, category, prodDescription, prodURL, amount
+            SELECT prodID, prodName, quantity, amount, category, prodUrl
             FROM Products;
             `
             db.query(strQry, (err, results) => {
@@ -25,9 +25,9 @@ class Products {
     recentProducts(req, res) {
         try {
             const strQry = `
-            SELECT productID, prodName, category, prodDescription, prodURL, amount
+            SELECT prodID, prodName, quantity, amount, category, prodUrl
             FROM Products
-            ORDER BY productID DESC
+            ORDER BY prodID DESC
             LIMIT 5;
             `
             db.query(strQry, (err, results) => {
@@ -48,9 +48,9 @@ class Products {
     fetchProduct(req, res) {
         try {
             const strQry = `
-            SELECT productID, prodName, category, prodDescription, prodURL, amount
+            SELECT prodID, prodName, quantity, amount, category, prodUrl
             FROM Products
-            WHERE productID = ${req.params.id};
+            WHERE prodID = ${req.params.id};
             `
             db.query(strQry, (err, result) => { 
                 if (err) throw new Error('Unable to retrieve a product')
@@ -93,7 +93,7 @@ class Products {
             const strQry = `
             UPDATE Products
             SET ?
-            WHERE productID = ${req.params.id};
+            WHERE prodID = ${req.params.id};
             `
             db.query(strQry, [req.body], (err) => { 
                 if (err) throw new Error('Unable to update a product')
@@ -114,7 +114,7 @@ class Products {
         try {
             const strQry = `
             DELETE FROM Products
-            WHERE productID = ${req.params.id};
+            WHERE prodID = ${req.params.id};
             `
             db.query(strQry, (err) => { 
                 if (err) throw new Error('Unable to delete a product')
@@ -130,6 +130,7 @@ class Products {
             })
         }
     }
+    
 }
 
 export { 

@@ -6,7 +6,7 @@ class Users {
     fetchUsers(req, res) {
         try {
             const strQry = `
-        SELECT firstName, lastName, age, emailAdd, userRole, profileURL
+        SELECT firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
         FROM Users;
         `
             db.query(strQry, (err, results) => {
@@ -26,7 +26,7 @@ class Users {
     fetchUser(req, res) {
         try {
             const strQry = `
-        SELECT userID, firstName, lastName, age, emailAdd, userRole, profileURL
+        SELECT userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
         FROM Users
         WHERE userID = ${req.params.id};
         `
@@ -128,7 +128,7 @@ class Users {
         try {
             const { emailAdd, pwd } = req.body
             const strQry = `
-        SELECT userID, firstName, lastName, age, emailAdd, pwd, userRole, profileURL
+        SELECT userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
         FROM Users
         WHERE emailAdd = '${emailAdd}';
         `
