@@ -1,23 +1,21 @@
 <template>
-  <div class="home">
-    <nav-bar-comp/>
-    <h1>Home</h1>
-
-    <footer-comp/>
-  </div>
+    <div>
+        <nav-bar-comp/>
+        <h1>Single Product</h1>
+        <footer-comp/>
+    </div>
 </template>
-
 <script>
-// @ is an alias to /src
 import NavBarComp from '@/components/NavBarComp.vue'
 import FooterComp from '@/components/FooterComp.vue'
-
-
 export default {
-  name: 'HomeView',
+    name: 'ProductView',
   components: {
     NavBarComp,
     FooterComp
   }
 }
 </script>
+<style lang="">
+    
+</style>
