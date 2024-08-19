@@ -1,5 +1,5 @@
 import { connection as db } from '../config/index.js'
-import { createToken } from '../middleware/AuthenticateUser.js'
+import { createToken } from '../middleware/AuthenicateUser.js'
 import { compare, hash } from 'bcrypt'
 
 class Users {
