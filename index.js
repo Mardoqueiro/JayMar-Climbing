@@ -29,7 +29,7 @@ app.use(
 )
 
 app.get('^/$|/eShop', (req, res) => {
-    res.status(200).sendFile(path.resolve('./static/html/index.html'))
+    res.status(200).sendFile(path.resolve('./static/HTML/index.html'))
 })
 
 app.get('*', (req, res) => {
