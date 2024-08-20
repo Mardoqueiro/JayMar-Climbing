@@ -1,21 +1,17 @@
 <template>
-
-      
-    <div>
-        <div>
-            <p>
-                JAYMOR Climbers &copy; <span id="currYear"></span>
+    <div class="container-fluid">
+        <div class="row">
+            <p class="lead">
+                JayMar Climbing &copy; <span id="currYear"></span>
             </p>
         </div>
     </div>
-
-  
 </template>
+
 <script>
 export default {
-    
+    name: "FooterComp",
 }
 </script>
-<style>
-    
-</style>
+
+<style scoped></style>
