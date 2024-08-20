@@ -3,8 +3,8 @@ import axios from 'axios'
 import { toast } from 'vue3-toastify'
 import 'vue3-toastify/dist/index.css'
 import router from '@/router'
-import { useCookies } from 'vue3-cookies'
-const { cookies } = useCookies()
+// import { useCookies } from 'vue3-cookies'
+// const { cookies } = useCookies()
 const apiURL = 'https://jaymar-climbing.onrender.com'
 
 export default createStore({

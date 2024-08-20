@@ -1,9 +1,12 @@
 <template>
-  <NavBar />
+  <div class="wrapper">
+    <nav-bar-comp/>
   <main>
     <router-view />
   </main>
-  <Footer/>
+  <footer-comp/>
+  </div>
+  
 </template>
 <script>
 import FooterComp from '@/components/FooterComp.vue';
@@ -16,4 +19,5 @@ export default {
 }
 </script>
 <style src="@/assets/css/style.css">
+
 </style>
