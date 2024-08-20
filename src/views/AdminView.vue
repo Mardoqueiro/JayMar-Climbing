@@ -1,14 +1,15 @@
 <template>
     <div>
-        <nav-bar-comp/>
-        <h1>Admin Page</h1>
+      <nav-bar-comp/>
+
+      <h1>Admin</h1>
 
 
 
 
 
-        <footer-comp/>
-    </div>
+      <footer-comp/>
+  </div>
 </template>
 <script>
 import NavBarComp from '@/components/NavBarComp.vue'
