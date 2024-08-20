@@ -8,5 +8,103 @@
 </head>
 <body>
     <h2>Welcome to JayMar Climbing</h2>
+
+    <div class="container">
+        <h1>API Documentation</h1>
+        
+        <h2>Home</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>HTTP Methods</th>
+                    <th>Path</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/</td>
+                    <td>Home page</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Users</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>HTTP Methods</th>
+                    <th>Path</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/user</td>
+                    <td>Retrieve all users</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/user/:id</td>
+                    <td>Retrieve a user by ID</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/user/Signup </td>
+                    <td>Sign up a new user</td>
+                </tr>
+                <tr>
+                    <td>PATCH/PUT</td>
+                    <td>/user/update/:id</td>
+                    <td>Update user details by ID</td>
+                </tr>
+                <tr>
+                    <td>DELETE</td>
+                    <td>/user/delete/:id</td>
+                    <td>Delete a user by ID</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/user/login/:id</td>
+                    <td>Login a user by emailAdd</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Products</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>HTTP Methods</th>
+                    <th>Path</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GET</td>
+                    <td>/product</td>
+                    <td>Retrieve all products</td>
+                </tr>
+                <tr>
+                    <td>GET</td>
+                    <td>/product/:id</td>
+                    <td>Retrieve a product by ID</td>
+                </tr>
+                <tr>
+                    <td>POST</td>
+                    <td>/product/add</td>
+                    <td>Add a new product</td>
+                </tr>
+                <tr>
+                    <td>PATCH</td>
+                    <td>/product/update/:id</td>
+                    <td>Update product details by ID</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
