@@ -44,14 +44,14 @@ class Users {
             })
         }
     }
-    async registerUser(req, res) {
+    async signupUser(req, res) {
         try {
             let data = req.body
-            data.pwd = await hash(data.pwd, 12)
+            data.userPass = await hash(data.userPass, 12)
             // Payload
             let user = {
                 emailAdd: data.emailAdd,
-                pwd: data.pwd
+                userPass: data.userPass
             }
             let strQry = `
         INSERT INTO Users
@@ -81,8 +81,8 @@ class Users {
     async updateUser(req, res) {
         try {
             let data = req.body
-            if (data.pwd) {
-                data.pwd = await hash(data.pwd, 12)
+            if (data.userPass) {
+                data.userPass = await hash(data.userPass, 12)
             }
             const strQry = `
         UPDATE Users
@@ -126,7 +126,7 @@ class Users {
     }
     async login(req, res) {
         try {
-            const { emailAdd, pwd } = req.body
+            const { emailAdd, userPass } = req.body
             const strQry = `
         SELECT userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
         FROM Users
@@ -142,11 +142,11 @@ class Users {
                         }
                     )
                 } else {
-                    const isValidPass = await compare(pwd, result[0].pwd)
+                    const isValidPass = await compare(userPass, result[0].userPass)
                     if (isValidPass) {
                         const token = createToken({
                             emailAdd,
-                            pwd
+                            userPass
                         })
                         res.json({
                             status: res.statusCode,
@@ -169,6 +169,4 @@ class Users {
         }
     }
 }
-export {
-    Users
-}
+export { Users }
