@@ -1,17 +1,19 @@
 import { createStore } from 'vuex'
 import axios from 'axios'
 import { toast } from 'vue3-toastify'
-// import 'vue3-toastify/dist/vue3-toastify.css'
+import 'vue3-toastify/dist/index.css'
 import router from '@/router'
-
+import { useCookies } from 'vue3-cookies'
+const { cookies } = useCookies()
+const apiURL = 'https://jaymar-climbing.onrender.com'
 
 export default createStore({
   state: {
-    user: null,
     users: null,
-    product: null,
-    products: null
-
+    user: null,
+    products: null,
+    recentProducts: null,
+    product: null
   },
   getters: {
   },
@@ -25,11 +27,15 @@ export default createStore({
     getProduct(state,payload){
       state.product = payload
     },
+    getRecentProducts(state,payload){
+      state.recentProducts = payload
+    },
     getProducts(state,payload){
       state.products = payload
     }
   },
   actions: {
+    // ==== User ========
     async fetchUser(context, id) {
       try {
         const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
@@ -125,7 +131,8 @@ export default createStore({
         })
       }
     },
- 
+
+  // ==== Product =====
     async fetchProducts(context) {
       try {
         const { results } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product`)).data
@@ -142,7 +149,25 @@ export default createStore({
       }
 
     },
-   
+    async recentProducts(context) {
+      try {
+        const { results, msg } = await (await axios.get(`${apiURL}product/recent`)).data
+        if (results) {
+          context.commit('setRecentProducts', results)
+        } else {
+          toast.error(`${msg}`, {
+            autoClose: 2000,
+            position: toast.POSITION.BOTTOM_CENTER
+          })
+        }
+      } catch (e) {
+        toast.error(`${e.message}`, {
+          autoClose: 2000,
+          position: toast.POSITION.BOTTOM_CENTER
+        })
+      }
+    },
+
     async fetchProduct(context, id) {
       try {
         const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data

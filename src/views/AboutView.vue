@@ -1,5 +1,5 @@
 <template>
-  <div>
+    <div>
       <nav-bar-comp/>
 
       <h1>About Us</h1>
@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+
 import NavBarComp from '@/components/NavBarComp.vue'
 import FooterComp from '@/components/FooterComp.vue'
 
