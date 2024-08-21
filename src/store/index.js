@@ -5,7 +5,7 @@ import 'vue3-toastify/dist/index.css'
 import router from '@/router'
 // import { useCookies } from 'vue3-cookies'
 // const { cookies } = useCookies()
-const apiURL = 'https://jaymar-climbing.onrender.com'
+const apiURL = 'https://jaymar-climbing.onrender.com/';
 
 export default createStore({
   state: {
@@ -38,9 +38,9 @@ export default createStore({
     // ==== User ========
     async fetchUser(context, id) {
       try {
-        const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
+        const { result, msg } = await (await axios.get(`${apiURL}user/${id}`)).data
         if (result) {
-          context.commit('setUser', result)
+          context.commit('getUser', result)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -56,9 +56,9 @@ export default createStore({
     },
     async fetchUsers(context) {
       try {
-        const { results, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user`)).data
+        const { results, msg } = await (await axios.get(`${apiURL}user`)).data
         if (results) {
-          context.commit('setUsers', results)
+          context.commit('getUsers', results)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -74,7 +74,7 @@ export default createStore({
     },
     async register(context, payload) {
       try {
-        const { msg, err, token } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}user/register`, payload)).data
+        const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
         if (token) {
           context.dispatch('fetchUsers')
           toast.success(`${msg}`, {
@@ -97,7 +97,7 @@ export default createStore({
     },
     async updateUser(context, payload) {
       try {
-        const { msg, err } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}user/${payload.userID}`, payload)).data
+        const { msg, err } = await (await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data
         if (msg) {
           context.dispatch('fetchUsers')
         } else {
@@ -115,7 +115,7 @@ export default createStore({
     },
     async deleteUser(context, id) {
       try {
-        const { msg, err } = await (await axios.delete(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
+        const { msg, err } = await (await axios.delete(`${apiURL}user/${id}`)).data
         if (msg) {
           context.dispatch('fetchUsers')
         } else {
@@ -135,9 +135,9 @@ export default createStore({
   // ==== Product =====
     async fetchProducts(context) {
       try {
-        const { results } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product`)).data
+        const { results } = await (await axios.get(`${apiURL}product`)).data
         if (results) {
-          context.commit('setProducts', results)
+          context.commit('getProducts', results)
         } else {
           router.push({ name: 'login' })
         }
@@ -170,7 +170,7 @@ export default createStore({
 
     async fetchProduct(context, id) {
       try {
-        const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data
+        const { result, msg } = await (await axios.get(`${apiURL}product/${id}`)).data
         if (result) {
           context.commit('setProduct', result)
         } else {
@@ -188,7 +188,7 @@ export default createStore({
     },
     async addAProduct(context, payload) {
       try {
-        const { msg } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}product/add`, payload)).data
+        const { msg } = await (await axios.post(`${apiURL}product/add`, payload)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
@@ -205,7 +205,7 @@ export default createStore({
     },
     async updateProduct(context, payload) {
       try {
-        const { msg } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}product/${payload.productID}`, payload)).data
+        const { msg } = await (await axios.patch(`${apiURL}product/${payload.productID}`, payload)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
@@ -222,7 +222,7 @@ export default createStore({
     },
     async deleteProduct(context, id) {
       try {
-        const { msg } = await (await axios.delete(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data
+        const { msg } = await (await axios.delete(`${apiURL}product/${id}`)).data
         if (msg) {
           context.dispatch('fetchProducts')
           toast.success(`${msg}`, {
