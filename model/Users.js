@@ -60,7 +60,7 @@ class Users {
             db.query(strQry, [data], (err) => {
                 if (err) {
                     res.json({
-                        status: res.statusCode,
+                        status: 400,
                         msg: 'This email has already been taken'
                     })
                 } else {

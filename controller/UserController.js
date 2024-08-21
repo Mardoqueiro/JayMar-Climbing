@@ -9,7 +9,7 @@ userRouter.get('/', (req, res) => {
     users.fetchUsers(req, res)
 })
 
-userRouter.get('/users', (req, res) => { 
+userRouter.get('/:id', (req, res) => { 
     users.fetchUser(req, res)
 })
 
