@@ -36,7 +36,7 @@ export default createStore({
   },
   actions: {
     // ==== User ========
-    async fetchUser(info, id) {
+    async fetchUser(context, id) {
       try {
         const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
         if (result) {
