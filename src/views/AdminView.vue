@@ -3,6 +3,7 @@
       <!-- <nav-bar-comp/> -->
 
       <h1>Admin</h1>
+
         <div>
             <form action="">
                 <h4>Add and Edit Users</h4>
@@ -24,7 +25,6 @@
       </form>
       </div>
      
-
 
 
       <!-- <footer-comp/> -->
