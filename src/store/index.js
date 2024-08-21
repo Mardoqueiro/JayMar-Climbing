@@ -36,7 +36,7 @@ export default createStore({
   },
   actions: {
     // ==== User ========
-    async fetchUser(context, id) {
+    async fetchUser(info, id) {
       try {
         const { result, msg } = await (await axios.get(`${apiURL}user/${id}`)).data
         if (result) {
@@ -54,7 +54,7 @@ export default createStore({
         })
       }
     },
-    async fetchUsers(context) {
+    async fetchUsers(info) {
       try {
         const { results, msg } = await (await axios.get(`${apiURL}user`)).data
         if (results) {
@@ -72,11 +72,11 @@ export default createStore({
         })
       }
     },
-    async register(context, payload) {
+    async register(info, payload) {
       try {
         const { msg, err, token } = await (await axios.post(`${apiURL}user/register`, payload)).data
         if (token) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -95,11 +95,11 @@ export default createStore({
         })
       }
     },
-    async updateUser(context, payload) {
+    async updateUser(info, payload) {
       try {
         const { msg, err } = await (await axios.patch(`${apiURL}user/${payload.userID}`, payload)).data
         if (msg) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
@@ -113,11 +113,11 @@ export default createStore({
         })
       }
     },
-    async deleteUser(context, id) {
+    async deleteUser(info, id) {
       try {
         const { msg, err } = await (await axios.delete(`${apiURL}user/${id}`)).data
         if (msg) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
@@ -131,12 +131,11 @@ export default createStore({
         })
       }
     },
-
-  // ==== Product =====
-    async fetchProducts(context) {
+    async fetchProducts(info) {
       try {
         const { results } = await (await axios.get(`${apiURL}product`)).data
         if (results) {
+
           context.commit('getProducts', results)
         } else {
           router.push({ name: 'login' })
@@ -149,11 +148,11 @@ export default createStore({
       }
 
     },
-    async recentProducts(context) {
+    async recentProducts(info) {
       try {
         const { results, msg } = await (await axios.get(`${apiURL}product/recent`)).data
         if (results) {
-          context.commit('setRecentProducts', results)
+          info.commit('setRecentProducts', results)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -168,11 +167,11 @@ export default createStore({
       }
     },
 
-    async fetchProduct(context, id) {
+    async fetchProduct(info, id) {
       try {
         const { result, msg } = await (await axios.get(`${apiURL}product/${id}`)).data
         if (result) {
-          context.commit('setProduct', result)
+          info.commit('setProduct', result)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -186,11 +185,11 @@ export default createStore({
         })
       }
     },
-    async addAProduct(context, payload) {
+    async addAProduct(info, payload) {
       try {
         const { msg } = await (await axios.post(`${apiURL}product/add`, payload)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -203,11 +202,11 @@ export default createStore({
         })
       }
     },
-    async updateProduct(context, payload) {
+    async updateProduct(info, payload) {
       try {
         const { msg } = await (await axios.patch(`${apiURL}product/${payload.productID}`, payload)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -220,11 +219,11 @@ export default createStore({
         })
       }
     },
-    async deleteProduct(context, id) {
+    async deleteProduct(info, id) {
       try {
         const { msg } = await (await axios.delete(`${apiURL}product/${id}`)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
