@@ -191,7 +191,7 @@ export default createStore({
       }
     },
     async addAProduct(info, payload) {
-      
+
       try {
         const { msg } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}product/add`, payload)).data
         if (msg) {
@@ -227,6 +227,8 @@ export default createStore({
     },
     async deleteProduct(info, id) {
       try {
+        console.log('here');
+        
         const { msg } = await (await axios.delete(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data
         if (msg) {
           info.dispatch('fetchProducts')

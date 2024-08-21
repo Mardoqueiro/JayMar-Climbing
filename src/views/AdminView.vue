@@ -31,11 +31,12 @@
                     </div>
                     <div class="modal-body">
                       <div class="admin-input">
-                              <input type="number" class="lot" :v-model="payload.prodID">
-                              <input type="text" class="brand" :v-model="payload.prodName">
-                              <input type="text" class="cat" :v-model="payload.category">
-                              <input type="text" class="desc" :v-model="payload.quantity">
-                              <input type="number" class="price" :v-model="payload.amount">
+                        <input type="number"  placeholder="" v-model="payload.prodID" value="Data">
+                        <input type="text"  placeholder="" v-model="payload.prodName">
+                        <input type="text"  placeholder="" v-model="payload.category" value="Data">
+                        <input type="number"  placeholder="" v-model="payload.quantity ">
+                        <input type="number"  placeholder="" v-model="payload.amount" value="Data">
+                        <input type="text"  placeholder="" v-model="payload.prodUrl ">
                               
                       </div>
                     </div>
@@ -48,7 +49,7 @@
               </div>
        </div>
 
-
+<!-- edit prod -->
         <table class="table table-striped">
           <thead>
             <tr>
@@ -72,30 +73,31 @@
               <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#updateProductModal${product.prodID}`">Edit Product</button>
 
 <!-- Modal -->
-<div class="modal fade" :id="`updateProductModal${product.prodID}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-                  <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">Update a product</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="console.log('modalclosed')"></button>
-                  </div>
-      <div class="modal-body">
-        <div class="admin-input">
-                <input type="number"  placeholder="" v-model="payload.prodID" value="Data">
-                <input type="text"  placeholder="">
-                <input type="text"  placeholder="">
-                <input type="text"  placeholder="">
-                <input type="number"  placeholder="">
-                <input type="file">
-            </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" v-on:click="console.log('closed')">Close</button>
-        <button type="button"  @click.prevent="console.log('hey')">Save changes</button>
+    <div class="modal fade" :id="`updateProductModal${product.prodID}`" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">Update a product</h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="console.log('modalclosed')"></button>
+                    </div>
+        <div class="modal-body">
+                <div class="admin-input">
+                  <input type="number" :placeholder="product.prodID" v-model="payload.prodID" value="Data">
+                  <input type="text"  placeholder="" v-model="payload.prodName" value="Data">
+                  <input type="text"  placeholder="" v-model="payload.category" value="Data">
+                  <input type="text"  placeholder="" v-model="payload.amount" value="Data">
+                  <input type="text"  placeholder="" v-model="payload.quantity" value="Data">
+                  <input type="text"  placeholder="" v-model="payload.prodUrl" value="Data">
+
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" >Close</button>
+          <button type="button"  @click.prevent="updatProduct()">Save changes</button>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+    </div>
 <button v-on:click="console.log('hi')">delete</button></td>
            
             </tr>
@@ -142,6 +144,9 @@
       <!-- <footer-comp/> -->
   </div>
 </template>
+
+
+
 <script>
 // import NavBarComp from '@/components/NavBarComp.vue'
 // import FooterComp from '@/components/FooterComp.vue'
@@ -158,10 +163,13 @@ export default {
         prodName: '',
         category: '',
         quantity: 0,
-        amount: 0
+        amount: 0,
+        prodUrl : ''
       }
     }
-  },
+  }
+  
+  ,
   computed: {
     products() {
       return this.$store.state.products;
@@ -190,11 +198,30 @@ methods:{
       // console.log('New product:', this.payload);
       this.$store.dispatch('addProduct', this.payload);
       // console.log('Product added to store!');
-    }
+  },
+
+  updatProduct() {
+       console.log('added');
+       
+      // const newProduct = {
+      //   prodID: this.products.length + 1,
+      //   prodName: this.$refs.prodName.value,
+      //   category: this.$refs.category.value,
+      //   quantity: this.$refs.quantity.value,
+      //   amount: this.$refs.amount.value
+      // };
+
+      // console.log('New product:', this.payload);
+      this.$store.dispatch('updateProduct', this.payload);
+      // console.log('Product added to store!');
+  }
 
 }
 }
 </script>
+
+
+
 <style>
 @media only screen and (min-width: 770px) {
       .btn{
