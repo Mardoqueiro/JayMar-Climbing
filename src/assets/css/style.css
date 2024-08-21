@@ -14,27 +14,23 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(270deg, #ff0000 , #ffa200);
+    /* background: linear-gradient(270deg, #ff0000 , #ffa200); */
 }
 
-.container{
+/* .container{
     max-width: 800px;   
     margin: 0 auto;
     padding: 20px;
     background: linear-gradient(90deg, #ff0000 , #ffa200);
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+} */
 .wrapper {
     display: grid;
     grid-template-rows: auto minmax(100dvh, 100%) auto;
 }
 
-/*---------------------------------------
-  #CONTACT  
-  Code from Ivan Grozdic
-  @ig_design from Codepen.io
-----------------------------------------*/
+
 
 a {
 	cursor: pointer;

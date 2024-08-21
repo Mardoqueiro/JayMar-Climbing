@@ -5,7 +5,7 @@ import 'vue3-toastify/dist/index.css'
 import router from '@/router'
 // import { useCookies } from 'vue3-cookies'
 // const { cookies } = useCookies()
-const apiURL = 'https://jaymar-climbing.onrender.com'
+
 
 export default createStore({
   state: {
@@ -32,15 +32,19 @@ export default createStore({
     },
     getProducts(state,payload){
       state.products = payload
+    },
+    addProduct(state,newProduct){
+      console.log('Add product mutation called!');
+      state.products.push(newProduct)
     }
   },
   actions: {
-    // ==== User ========
-    async fetchUser(context, id) {
+
+    async fetchUser(info, id) {
       try {
         const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
         if (result) {
-          context.commit('getUser', result)
+          info.commit('getUser', result)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -54,11 +58,11 @@ export default createStore({
         })
       }
     },
-    async fetchUsers(context) {
+    async fetchUsers(info) {
       try {
         const { results, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}user`)).data
         if (results) {
-          context.commit('getUsers', results)
+          info.commit('getUsers', results)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -72,11 +76,11 @@ export default createStore({
         })
       }
     },
-    async register(context, payload) {
+    async register(info, payload) {
       try {
         const { msg, err, token } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}user/register`, payload)).data
         if (token) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -95,11 +99,11 @@ export default createStore({
         })
       }
     },
-    async updateUser(context, payload) {
+    async updateUser(info, payload) {
       try {
         const { msg, err } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}user/${payload.userID}`, payload)).data
         if (msg) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
@@ -113,11 +117,11 @@ export default createStore({
         })
       }
     },
-    async deleteUser(context, id) {
+    async deleteUser(info, id) {
       try {
         const { msg, err } = await (await axios.delete(`${'https://jaymar-climbing.onrender.com/'}user/${id}`)).data
         if (msg) {
-          context.dispatch('fetchUsers')
+          info.dispatch('fetchUsers')
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
@@ -132,12 +136,12 @@ export default createStore({
       }
     },
 
-  // ==== Product =====
-    async fetchProducts(context) {
+
+    async fetchProducts(info) {
       try {
         const { results } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product`)).data
         if (results) {
-          context.commit('getProducts', results)
+          info.commit('getProducts', results)
         } else {
           router.push({ name: 'login' })
         }
@@ -149,30 +153,30 @@ export default createStore({
       }
 
     },
-    async recentProducts(context) {
-      try {
-        const { results, msg } = await (await axios.get(`${apiURL}product/recent`)).data
-        if (results) {
-          context.commit('getRecentProducts', results)
-        } else {
-          toast.error(`${msg}`, {
-            autoClose: 2000,
-            position: toast.POSITION.BOTTOM_CENTER
-          })
-        }
-      } catch (e) {
-        toast.error(`${e.message}`, {
-          autoClose: 2000,
-          position: toast.POSITION.BOTTOM_CENTER
-        })
-      }
-    },
+    // async recentProducts(info) {
+    //   try {
+    //     const { results, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product/recent`)).data
+    //     if (results) {
+    //       info.commit('getRecentProducts', results)
+    //     } else {
+    //       toast.error(`${msg}`, {
+    //         autoClose: 2000,
+    //         position: toast.POSITION.BOTTOM_CENTER
+    //       })
+    //     }
+    //   } catch (e) {
+    //     toast.error(`${e.message}`, {
+    //       autoClose: 2000,
+    //       position: toast.POSITION.BOTTOM_CENTER
+    //     })
+    //   }
+    // },
 
-    async fetchProduct(context, id) {
+    async fetchProduct(info, id) {
       try {
         const { result, msg } = await (await axios.get(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data
         if (result) {
-          context.commit('getProduct', result)
+          info.commit('getProduct', result)
         } else {
           toast.error(`${msg}`, {
             autoClose: 2000,
@@ -186,11 +190,12 @@ export default createStore({
         })
       }
     },
-    async addAProduct(context, payload) {
+    async addAProduct(info, payload) {
+      
       try {
         const { msg } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}product/add`, payload)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -203,11 +208,11 @@ export default createStore({
         })
       }
     },
-    async updateProduct(context, payload) {
+    async updateProduct(info, payload) {
       try {
         const { msg } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}product/${payload.productID}`, payload)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -220,11 +225,11 @@ export default createStore({
         })
       }
     },
-    async deleteProduct(context, id) {
+    async deleteProduct(info, id) {
       try {
         const { msg } = await (await axios.delete(`${'https://jaymar-climbing.onrender.com/'}product/${id}`)).data
         if (msg) {
-          context.dispatch('fetchProducts')
+          info.dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
