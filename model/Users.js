@@ -6,8 +6,9 @@ class Users {
     fetchUsers(req, res) {
         try {
             const strQry = `
-        SELECT firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
-        FROM Users;
+        SELECT userID, firstName, lastName, userAge, Gender, userRole, emailAdd, userPass, userProfile
+        FROM Users
+        ;
         `
             db.query(strQry, (err, results) => {
                 if (err) throw new Error('Issue when retrieving all users.')
