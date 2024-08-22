@@ -210,7 +210,9 @@ export default createStore({
     },
     async updateProduct(info, payload) {
       try {
-        const { msg } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}product/${payload.productID}`, payload)).data
+        console.log(payload);
+        
+        const { msg } = await (await axios.patch(`${'https://jaymar-climbing.onrender.com/'}product/${payload.prodID}`, payload)).data
         if (msg) {
           info.dispatch('fetchProducts')
           toast.success(`${msg}`, {

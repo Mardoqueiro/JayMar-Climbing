@@ -4,12 +4,7 @@
     <div class="row gap-2 justify-content-center">
     <card-comp  v-for="product in products" :key="product">
       <template #cardHeader>
-        <img
-          :src="product.prodUrl"
-          loading="lazy"
-          class="img-fluid"
-          :alt="product.prodName"
-        />
+        <img :src="product.prodUrl" loading="lazy" class="img-fluid" :alt="product.prodName"/>
       </template>
       <template #cardBody>
         <h5 class="card-title fw-bold ">{{ product.prodName }}</h5>
@@ -27,6 +22,7 @@
         </div>
       </template>
     </card-comp>
+    <p>{{ products }}</p>
   </div>
   </div>
 </template>
@@ -47,7 +43,7 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch("fetchProducts");
+    this.$store.dispatch("fetchProducts")
   },
 };
 </script>
