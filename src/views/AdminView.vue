@@ -1,4 +1,5 @@
 <template>
+  <!-- eslint disable -->
   <div class="container-main">
    
 
@@ -32,12 +33,17 @@
                             </div>
                             <div class="modal-body">
                               <div class="admin-input">
-                                <input type="number" placeholder="" v-model="payload.prodID" value="Data"/>
-                                <input type="text" placeholder="" v-model="payload.prodName"/>
-                                <input type="text" placeholder="" v-model="payload.category" value="Data"/>
-                                <input type="number" placeholder="" v-model="payload.quantity"/>
-                                <input type="number" placeholder="" v-model="payload.amount" value="Data"/>
-                                <input type="text" placeholder="" v-model="payload.prodUrl"/>
+                                <input type="number" placeholder="Product ID" v-model="payload.prodID" value="Data" label="id"/>
+                                <br> <br>
+                                <input type="text" placeholder="Product Name" v-model="payload.prodName" aria-label="product name"/>
+                                <br> <br>
+                                <input type="text" placeholder="Category" v-model="payload.category" value="Data"/>
+                                <br> <br>
+                                <input type="number" placeholder="Quantity" v-model="payload.quantity"/>
+                                <br> <br>
+                                <input type="number" placeholder="Amount" v-model="payload.amount" value="Data"/>
+                                <br> <br>
+                                <input type="text" placeholder="URL" v-model="payload.prodUrl"/>
                               </div>
                             </div>
                             <div class="modal-footer">
@@ -79,7 +85,7 @@
                       <div class="modal-content">
                                   <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="exampleModalLabel">Update a product</h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" v-on:click="console.log('modalclosed')"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                 <div class="modal-body">
                                         <div class="admin-input">
@@ -124,13 +130,22 @@
                             </div>
                             <div class="modal-body">
                               <div class="admin-input">
-                                <input type="number" placeholder="" v-model="payload.firstName" value="Data"/>
-                                <input type="text" placeholder="" v-model="payload.lastName"/>
-                                <input type="text" placeholder="" v-model="payload.userAge" value="Data"/>
-                                <input type="number" placeholder="" v-model="payload.Gender"/>
-                                <input type="number" placeholder="" v-model="payload.userRole" value="Data"/>
-                                <input type="text" placeholder="" v-model="payload.emailAdd"/>
-                                <input type="text" placeholder="" v-model="payload.userProfile"/>
+                                <h5>please fill out all fields</h5>
+                                <input type="text" placeholder="First Name" v-model="payload.firstName" value="" required/>
+                                <br><br>
+                                <input type="text" placeholder="Last Name" v-model="payload.lastName" required/>
+                                <br><br>
+                                <input type="number" placeholder="User's Age" v-model="payload.userAge" value="Data" required/>
+                                <br><br>
+                                <input type="text" placeholder="Gender" v-model="payload.Gender" required/>
+                                <br><br>
+                                <input type="text" placeholder="User Role" v-model="payload.userRole" value="Data" required/>
+                                <br><br>
+                                <input type="text" placeholder="Email address" v-model="payload.emailAdd" required/>
+                                <br><br>
+                                <input type="text" placeholder="User Profile" v-model="payload.userProfile" required/>
+                                <br><br>
+                                <input type="text" placeholder="Password" v-model="payload.userPass" required/>
                               </div>
                             </div>
                             <div class="modal-footer">
@@ -145,6 +160,7 @@
         <table class="table table-striped">
               <thead>
                       <tr>
+                        <th>User ID Number</th>
                         <th>First Name</th>
                         <th>Last Name</th>
                         <th>Age</th>
@@ -155,8 +171,9 @@
                         <th>Actions</th>
                       </tr>
               </thead>
-              <tbody>
+              <tbody v-if="users">
                       <tr v-for="user in users" :key="user">
+                            <td>{{ user.userID }}</td>
                             <td>{{ user.firstName }}</td>
                             <td>{{ user.lastName }}</td>
                             <td>{{ user.userAge }}</td>
@@ -166,9 +183,9 @@
                             <td>{{ user.userProfile }}</td>                    
                             <td>
                                                 <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#updateUserModal${user.firstName}`">Edit User</button>
+                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#updateUserModal${user.userID}`">Edit User</button>
                                                 <!-- EDIT USER  MODAL-->  
-                                                <div class="modal fade" :id="`updateUserModal${user.id}`" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+                <div class="modal fade" :id="`updateUserModal${user.userID}`" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -177,26 +194,33 @@
                     </div>
                     <div class="modal-body">
                       <div class="admin-input">
-                        <!-- <input type="text" :value="user.firstName" v-model="userPayload.firstName"/>
-                        <input type="text" v-model="userPayload.lastName"/>
-                        <input type="number" v-model="userPayload.userAge"/>
-                        <input type="text" v-model="userPayload.Gender"/>
-                        <input type="text" v-model="userPayload.userRole"/>
-                        <input type="text" v-model="userPayload.emailAdd"/>
-                        <input type="text" v-model="userPayload.userProfile"/> -->
+                        <input type="text" :placeholder="user.userID" v-model="userPayload.usersID" readonly/>
+                        <input type="text" :placeholder="user.firstName" v-model="userPayload.firstName" required/>
+                        <input type="text" :placeholder="user.lastName" v-model="userPayload.lastName" required/>
+                        <input type="number" :placeholder="user.userAge" v-model="userPayload.userAge" required/>
+                        <input type="text" :placeholder="user.Gender" v-model="userPayload.Gender" required/>
+                        <input type="text" :placeholder="user.userRole" v-model="userPayload.userRole" required/>
+                        <input type="text" :placeholder="user.emailAdd" v-model="userPayload.emailAdd" required/>
+                        <input type="text" :placeholder="user.userProfile" v-model="userPayload.userProfile" required/>
+                        <input type="text" :placeholder="user.userPass" v-model="userPayload.userPass" required/>
                       </div>
                     </div>
                     <div class="modal-footer">
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" @click.prevent="updateUser(userID)">Save changes</button>
+                      <button type="button" @click.prevent="updateUser(JSON.stringify(user.userID))">Save changes</button>
                     </div>
                   </div>
                 </div>
               </div>
-                              <button v-on:click="deleteUser(user.userID)">delete</button>
+              <button v-on:click="deleteUser(user.userID)">delete</button>
                             </td>
                       </tr>
               </tbody>
+              <div v-else>
+                Loading
+              </div>
+            
+         
         </table>
       </div>
   </div>
@@ -229,6 +253,7 @@ export default {
         userRole: "",
         emailAdd: "",
         userProfile: "",
+        userPass:""
       },
     };
   },
@@ -251,7 +276,7 @@ export default {
       this.$store.dispatch('addAProduct', this.payload)
       .then(() => {
           console.log('Product added to store!');
-          this.resetPayload();
+          // this.resetPayload();
         });
       
     },
@@ -290,20 +315,34 @@ export default {
   },
   addUser(){
     this.$store.dispatch('addUser', this.userPayload)
-        .then(() => {
+    .then(() => {
           console.log('User added to store!');
-          this.resetUserPayload();
-        });
+          // this.resetPayload();
+        })
+        .catch((error)=>{
+          console.error('Error adding user',error)
+        })
   },
-  updateUser(userID){
-    const userToUpdate = this.users.find(u => u.id === userID);
-    if (userToUpdate) {
-        this.$store.dispatch('updateUser', { ...this.userPayload, id: userID })
-          .then(() => {
-            console.log('User updated in store!');
-            this.resetUserPayload();
-          });
-      }
+  updateUser(id){
+    // const userToUpdate = this.users.find(u => u.id === userID);
+    // if (userToUpdate) {
+    //     this.$store.dispatch('updateUser', { ...this.userPayload, id: userID })
+    //       .then(() => {
+    //         console.log('User updated in store!');
+    //         // this.resetUserPayload();
+            
+    //       });
+    //   }
+    const userPayload = {
+      userID: JSON.parse(id),
+      ...this.userPayload
+    }
+    this.$store.dispatch("updateUser", userPayload)
+    .then(() => {
+      console.log('User updated');
+      location.reload()
+      
+    })
     
   },
   deleteUser(userID){
@@ -323,11 +362,11 @@ export default {
     padding: 1px 3px;
   }
 }
-/* .table {
+.table {
   border-collapse: collapse;
-  width: 30%;
+  width: 70%;
   margin: 0 auto;
-} */
+}
 
 .table th,
 .table td {

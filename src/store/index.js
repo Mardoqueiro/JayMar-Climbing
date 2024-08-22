@@ -76,20 +76,20 @@ export default createStore({
         })
       }
     },
-    async register(info, payload) {
+    async addUser(info, payload) {
       try {
-        const { msg, err, token } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}user/register`, payload)).data
+        const { msg, err, token } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}user/signup`, payload)).data
         if (token) {
           info.dispatch('fetchUsers')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
           })
-          router.push({ name: 'login' })
+          // router.push({ name: 'login' })
         } else {
           toast.error(`${err}`, {
             autoClose: 2000,
-            position: toast.POSITION.TOP_CENTER
+            position: toast.POSITION.BOTTOM_CENTER
           })
         }
       } catch (e) {
