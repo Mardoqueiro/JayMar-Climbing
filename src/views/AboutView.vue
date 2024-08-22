@@ -38,7 +38,7 @@ export default {
 }
 </script>
 <style scoped>
-  /* Container for the About section */
+  Container for the About section
 .about-section {
   background-color: #f7f7f7; /* Light grey background */
   padding: 60px 20px; /* Spacing around the section */
