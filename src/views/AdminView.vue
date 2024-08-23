@@ -3,7 +3,15 @@
   <div class="container-main">
    
 
+<<<<<<< HEAD
                                           <h2>Products Table</h2>
+=======
+    <h2>Products Table</h2>
+    <div class="search-filter">
+      <input v-model="searchQuery" placeholder="Search by name" />
+    </div>
+      
+>>>>>>> f41bf7ec79861ee996164795fafce0133994f374
     <!-- <input type="text" placeholder="search"/>
     <br/>
     <label for="button">Filter by Catergory</label>
@@ -19,6 +27,7 @@
 
     <div class="table-container">
 
+<<<<<<< HEAD
                     <div class="newProduct">
                       <!-- ADD PRODUCT Modal -->
                       <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add New Product</button>
@@ -53,6 +62,92 @@
                             </div>
                           </div>
                         </div>
+=======
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Product ID</th>
+            <th>Product Name</th>
+            <th>Catergory</th>
+            <th>Quantity</th>
+            <th>Amount</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody v-if="products">
+          <tr v-for="product in products" :key="product.prodID">
+
+            <td>{{ product.prodID }}</td>
+            <td>{{ product.prodName }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}</td>
+            <td>{{ product.amount }}</td>
+            <td>
+              <!-- Button trigger modal -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                data-bs-toggle="modal"
+                :data-bs-target="`#updateProductModal${product.prodID}`"
+              >
+                Edit Product
+              </button>
+
+              <!-- EDIT PRODUCT  MODAL-->
+              <div
+                class="modal fade"
+                :id="`updateProductModal${product.prodID}`"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+              >
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Update a product
+                      </h1>
+                      <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                        aria-label="Close"
+                      ></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="admin-input">
+                        <input
+                          type="number"
+                          :placeholder="product.prodID"
+                          v-model="payload.prodID"
+                          readonly
+                        />
+                        <input
+                          type="text"
+                          :placeholder="product.prodName"
+                          v-model="payload.prodName"
+                        />
+                        <input
+                          type="text"
+                          :placeholder="product.category"
+                          v-model="payload.category"
+                        />
+                        <input
+                          type="text"
+                          :placeholder="product.amount"
+                          v-model="payload.amount"
+                        />
+                        <input
+                          type="text"
+                          :placeholder="product.quantity"
+                          v-model="payload.quantity"
+                        />
+                        <input
+                          type="text"
+                          :placeholder="product.prodUrl"
+                          v-model="payload.prodUrl"
+                        />
+>>>>>>> f41bf7ec79861ee996164795fafce0133994f374
                       </div>
                     </div>
 
@@ -246,6 +341,10 @@ export default {
   // },
   data() {
     return {
+      searchQuery: '',
+      selectedCategory: '',
+      priceSortOrder: 'asc',
+
       payload: {
         prodName: "",
         category: "",
@@ -253,6 +352,7 @@ export default {
         amount: 0,
         prodUrl: "",
       },
+      
       userPayload: {
         firstName: "",
         lastName: "",
@@ -263,6 +363,7 @@ export default {
         userProfile: "",
         userPass:""
       },
+      categories: [],
     };
   },
 
@@ -279,6 +380,43 @@ export default {
     this.$store.dispatch("fetchUsers");
   },
   methods: {
+    searchedProducts(){
+      this.filteredProducts = this.products.filter(product => product.prodName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      this.filterProducts();
+    },
+    filteredProducts() {
+      let filtered = this.products;
+      if (this.searchQuery) {
+        filtered = filtered.filter(product =>
+          product.prodName.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+
+      if (this.selectedCategory) {
+        filtered = filtered.filter(product =>
+          product.category === this.selectedCategory
+        );
+      }
+
+      if (this.priceSortOrder) {
+        filtered = filtered.slice().sort((a, b) => {
+          return this.priceSortOrder === 'asc'
+            ? a.amount - b.amount
+            : b.amount - a.amount;
+        });
+      }
+
+      return filtered;
+    },
+    sortProducts(propertyName) {
+      this.filteredProducts = this.filteredProducts.slice().sort((a, b) => {
+        if (this.priceSortOrder === 'asc') {
+          return a[propertyName] - b[propertyName];
+        } else {
+          return b[propertyName] - a[propertyName];
+        }
+      });
+    },
     addProduct() {
       console.log("added");
       this.$store.dispatch('addAProduct', this.payload)
@@ -303,6 +441,7 @@ export default {
           });
       
 
+<<<<<<< HEAD
       // const newProduct = {
       //   prodID: this.products.length + 1,
       //   prodName: this.$refs.prodName.value,
@@ -316,6 +455,17 @@ export default {
   },
   deleteProduct(prodID){
     this.$store.dispatch('deleteProduct', prodID)
+=======
+    },
+    deleteProduct(prodID) {
+      this.$store.dispatch("deleteProduct", prodID).then(() => {
+        console.log("Product deleted from store!");
+      });
+    },
+    addUser() {
+      this.$store
+        .dispatch("addUser", this.userPayload)
+>>>>>>> f41bf7ec79861ee996164795fafce0133994f374
         .then(() => {
           console.log('Product deleted from store!');
         });
@@ -382,7 +532,34 @@ async submitProductForm() {
       } else {
         console.log(this.errors); // Handle errors appropriately
       }
+<<<<<<< HEAD
     }
+=======
+    },
+  },
+  searchedProducts() {
+    if (!this.searchQuery) return this.products;
+    return this.products.filter(product => {
+      const productName = product.prodName.toLowerCase();
+      const searchQuery = this.searchQuery.toLowerCase();
+      return productName.includes(searchQuery);
+    });
+  },
+};
+</script>
+
+<style>
+#newUserbtn{
+  margin: 5em 48.5em;
+}
+#newProductbtn{
+  margin: 5em 46.5em;
+}
+@media only screen and (min-width: 770px) {
+  .btn {
+    margin: 1em 10em;
+    padding: 1px 3px;
+>>>>>>> f41bf7ec79861ee996164795fafce0133994f374
   }
 }
 

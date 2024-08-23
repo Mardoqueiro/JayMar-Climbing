@@ -28,6 +28,10 @@ export default {
 }
 </script>
 <style>
+<<<<<<< HEAD
+=======
+
+>>>>>>> f41bf7ec79861ee996164795fafce0133994f374
 .pcontent{
   text-align: center;
 }
