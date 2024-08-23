@@ -33,6 +33,7 @@
                             </div>
                             <div class="modal-body">
                               <div class="admin-input">
+                                <form @submit.prevent="submitProductForm">
                                 <input type="number" placeholder="Product ID" v-model="payload.prodID" value="Data" label="id"/>
                                 <br> <br>
                                 <input type="text" placeholder="Product Name" v-model="payload.prodName" aria-label="product name"/>
@@ -44,6 +45,7 @@
                                 <input type="number" placeholder="Amount" v-model="payload.amount" value="Data"/>
                                 <br> <br>
                                 <input type="text" placeholder="URL" v-model="payload.prodUrl"/>
+                                </form>
                               </div>
                             </div>
                             <div class="modal-footer">
@@ -104,7 +106,10 @@
                       </div>
                     </div>
                   </div>
-              <button @click="deleteProduct(product.prodID)">delete</button>
+             
+              <div>
+                <button class="delete-button" @click="deleteProduct(product.prodID)" ><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+              </div>
               </td>
             </tr>
             </tbody>
@@ -121,6 +126,7 @@
                                                        <!-- ADD NEW USER MODAL -->
         <div class="newUser">
                       <!-- ADD USER Modal -->
+                   
                       <div class="modal fade" id="addUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -131,25 +137,27 @@
                             <div class="modal-body">
                               <div class="admin-input">
                                 <h5>please fill out all fields</h5>
-                                <input type="text" placeholder="First Name" v-model="payload.firstName" value="" required/>
+                                <form @submit.prevent="submitUserForm">
+                                <input type="text" placeholder="First Name" v-model="userPayload.firstName" value="" required/>
                                 <br><br>
-                                <input type="text" placeholder="Last Name" v-model="payload.lastName" required/>
+                                <input type="text" placeholder="Last Name" v-model="userPayload.lastName" required/>
                                 <br><br>
-                                <input type="number" placeholder="User's Age" v-model="payload.userAge" value="Data" required/>
+                                <input type="number" placeholder="User's Age" v-model="userPayload.userAge" value="Data" required/>
                                 <br><br>
-                                <input type="text" placeholder="Gender" v-model="payload.Gender" required/>
+                                <input type="text" placeholder="Gender" v-model="userPayload.Gender" required/>
                                 <br><br>
-                                <input type="text" placeholder="User Role" v-model="payload.userRole" value="Data" required/>
+                                <input type="text" placeholder="User Role" v-model="userPayload.userRole" value="Data" required/>
                                 <br><br>
-                                <input type="text" placeholder="Email address" v-model="payload.emailAdd" required/>
+                                <input type="text" placeholder="Email address" v-model="userPayload.emailAdd" required/>
                                 <br><br>
-                                <input type="text" placeholder="User Profile" v-model="payload.userProfile" required/>
+                                <input type="text" placeholder="User Profile" v-model="userPayload.userProfile" required/>
                                 <br><br>
-                                <input type="text" placeholder="Password" v-model="payload.userPass" required/>
+                                <input type="text" placeholder="Password" v-model="userPayload.userPass" required/>
+                                </form>
                               </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>0
                                                                 <!-- BUTTON TO ADD NEW User -->
                                 <button type="button" class="btn btn-primary" @click.prevent="addUser()">Save changes</button>
                             </div>
@@ -212,7 +220,9 @@
                   </div>
                 </div>
               </div>
-              <button v-on:click="deleteUser(user.userID)">delete</button>
+              <div>
+                <button class="delete-button" v-on:click="deleteUser(user.userID)"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+              </div>
                             </td>
                       </tr>
               </tbody>
@@ -324,15 +334,6 @@ export default {
         })
   },
   updateUser(id){
-    // const userToUpdate = this.users.find(u => u.id === userID);
-    // if (userToUpdate) {
-    //     this.$store.dispatch('updateUser', { ...this.userPayload, id: userID })
-    //       .then(() => {
-    //         console.log('User updated in store!');
-    //         // this.resetUserPayload();
-            
-    //       });
-    //   }
     const userPayload = {
       userID: JSON.parse(id),
       ...this.userPayload
@@ -341,18 +342,52 @@ export default {
     .then(() => {
       console.log('User updated');
       location.reload()
-      
     })
-    
   },
   deleteUser(userID){
     this.$store.dispatch('deleteUser', userID)
         .then(() => {
           console.log('User deleted from store!');
         });
+  },
+  async submitUpdateForm() {
+      this.errors = {};
+      for (const [key, value] of Object.entries(this.userPayload)) {
+        if (!value) {
+          this.errors[key] = `${key} is required`;
+        }
+      }
+      if (Object.keys(this.errors).length === 0) {
+        await this.$store.dispatch('updateUser', {
+          userID: this.userId,
+          ...this.userPayload
+        });
+      } else {
+        console.log(this.errors);
+      }
+},
+async submitProductForm() {
+      this.errors = {};
+      for (const [key, value] of Object.entries(this.productPayload)) {
+        if (!value) {
+          this.errors[key] = `${key} is required`;
+        }
+      }
+      if (Object.keys(this.errors).length === 0) {
+        await this.$store.dispatch('addAProduct', this.productPayload);
+        this.productPayload = {
+          name: '',
+          price: '',
+          category: '',
+          description: ''
+        };
+      } else {
+        console.log(this.errors); // Handle errors appropriately
+      }
+    }
   }
 }
-}
+
 </script>
 
 <style>
@@ -383,7 +418,7 @@ export default {
   background-color: #b7eb3e;
 }
 
-.btn {
+/* .btn {
   display: inline-block;
   padding: 2px 6px;
   margin-bottom: 0;
@@ -416,5 +451,65 @@ export default {
   font-size: 12px;
   line-height: 1.5;
   border-radius: 3px;
+} */
+.delete-button {
+ width: 150px;
+ height: 50px;
+ cursor: pointer;
+ display: flex;
+ align-items: center;
+ background: red;
+ border: none;
+ border-radius: 5px;
+ box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+ background: #e62222;
+}
+
+.delete-button, button span {
+ transition: 200ms;
+}
+
+.delete-button .text {
+ transform: translateX(35px);
+ color: white;
+ font-weight: bold;
+}
+
+.delete-button .icon {
+ position: absolute;
+ border-left: 1px solid #c41b1b;
+ transform: translateX(110px);
+ height: 40px;
+ width: 40px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+}
+
+.delete-button svg {
+ width: 15px;
+ fill: #eee;
+}
+
+.delete-button:hover {
+ background: #ff3636;
+}
+
+.delete-button:hover .text {
+ color: transparent;
+}
+
+.delete-button:hover .icon {
+ width: 150px;
+ border-left: none;
+ transform: translateX(0);
+}
+
+.delete-button:focus {
+ outline: none;
+}
+
+.delete-button:active .icon svg {
+ transform: scale(0.8);
 }
 </style>

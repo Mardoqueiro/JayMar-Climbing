@@ -76,11 +76,11 @@ export default createStore({
         })
       }
     },
-    async addUser(info, payload) {
+    async addUser({ dispatch }, payload) {
       try {
         const { msg, err, token } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}user/signup`, payload)).data
         if (token) {
-          info.dispatch('fetchUsers')
+          dispatch('fetchUsers')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
@@ -190,12 +190,12 @@ export default createStore({
         })
       }
     },
-    async addAProduct(info, payload) {
+    async addAProduct({ dispatch }, payload) {
 
       try {
         const { msg } = await (await axios.post(`${'https://jaymar-climbing.onrender.com/'}product/add`, payload)).data
         if (msg) {
-          info.dispatch('fetchProducts')
+          dispatch('fetchProducts')
           toast.success(`${msg}`, {
             autoClose: 2000,
             position: toast.POSITION.TOP_CENTER
