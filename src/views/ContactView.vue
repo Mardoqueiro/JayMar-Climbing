@@ -5,9 +5,6 @@
         <div class="col-12 text-center align-self-center py-5">
           <h1 class="display-1">Reach Me</h1>
           <div class="section pb-5 pt-5 pt-sm-2 text-center">
-            <h6 class="mb-0 pb-3">
-              <span>Reach Me</span><span>Contact Info</span>
-            </h6>
             <input
               class="checkbox"
               type="checkbox"
@@ -30,7 +27,7 @@
                             href="https://mail.google.com/mail/u/0/#inbox?compose=GTvVlcSMTgtzpBJrtbstKWFKtVJDPfWNZrBHctjpwZnvcwDVZMqSdFGhTMNVsxRtxLZJjrFzrjNWM"
                             target="_blank"
                           >
-                            mordecai.dimbu@gmail.com
+                            JMClimbing@gmail.com
                           </a>
                         </p>
                         <p>

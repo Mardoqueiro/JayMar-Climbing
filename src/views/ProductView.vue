@@ -28,10 +28,6 @@ export default {
 }
 </script>
 <style>
-img{
-  
-
-}
 .pcontent{
   text-align: center;
 }

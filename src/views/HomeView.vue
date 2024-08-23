@@ -1,18 +1,24 @@
 <template>
   <div class="sectionContainer sectionContainer__header" id="home">
-    <div class="headerContentContainer">
-      <div class="headerImage">
-        <img
-          src="https://mardoqueiro.github.io/all_images/JayMar/prod/sideImg/HomefirstPic.png"
-          loading="lazy"
-          alt="JayMar Climbing"
-        />
-      </div>
-      <div class="headerContent">
-        <h1>JayMar Climbing</h1>
-        <p>For Rock Climbing Enthusiasts</p>
-        <p>Explore our range of high-quality climbing gear and accessories.</p>
-        <button class="btn btn-primary"><a href="/products">Shop Now</a></button>
+    <div class="row align-items-center">
+      <div class="headerContentContainer">
+        <div class="headerImage">
+          <img class="animate__animated animate__backInDown"
+            src="https://mardoqueiro.github.io/all_images/JayMar/prod/sideImg/EdgeClimb.png"
+            loading="lazy"
+            alt="JayMar Climbing"
+          />
+        </div>
+        <div class="headerContent">
+          <h1 class="animate__animated animate__fadeInRight">JayMar Climbing</h1>
+          <p class="animate__animated animate__fadeInLeft">For Rock Climbing Enthusiasts</p>
+          <p class="animate__animated animate__fadeInUp">
+            Explore our range of high-quality climbing gear and accessories.
+          </p>
+          <button class="btn btn-primary">
+            <a href="/products" class="btn-link">Shop Now</a>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -90,11 +96,88 @@ export default {
   },
 };
 </script>
-<style>
-/* img {
-  height: 100vh;
-  width: 100%;
-  background-size: cover;
-} */
+<style scoped>
+/* General styles for the header section */
+.sectionContainer__header {
+  padding: 40px;
+  background-color: #61481c; /* Light grey background */
+}
 
+/* Container to hold the image and content */
+.headerContentContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Allows wrapping for responsive design */
+  gap: 20px; /* Adds space between items */
+}
+
+/* Image styling */
+.headerImage {
+  flex: 1;
+  max-width: 50%; /* Limits image width */
+  padding: 10px;
+}
+
+.headerImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Content styling */
+.headerContent {
+  flex: 1;
+  max-width: 50%; /* Limits content width */
+  padding: 20px;
+  text-align: left;
+}
+
+.headerContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.headerContent p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #f2f2f2;
+  color: #e6b325;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background-color: #E6B325;
+}
+
+.btn-link {
+  color: #61481c;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .headerContentContainer {
+    flex-direction: column;
+  }
+
+  .headerImage,
+  .headerContent {
+    max-width: 100%;
+  }
+
+  .headerContent {
+    text-align: center;
+  }
+}
+
+button.btn {
+  background-color: #f2f2f2;
+}
 </style>

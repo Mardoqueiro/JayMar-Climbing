@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 :root {
@@ -9,12 +9,13 @@
     --extra-light: #f2f2f2;
     --max-width: 1200px;
     --gradient: linear-gradient(135deg, #61481C, #A47E3B);
-  }
+ }
   
   * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: 'Libre Baskerville', serif;
   }
 
   :is(h1, h2, h3, h4, h5, h6){
@@ -26,35 +27,34 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* background: linear-gradient(135deg, #61481C, #A47E3B); */
+    background: linear-gradient(135deg, #61481C, #A47E3B);
   }
 
   .container{
-    max-width: 800px;   
+    /* max-width: 1000px;    */
     margin: 0 auto;
     padding: 20px;
     background-color: #EDE3D1;
-    /* background: linear-gradient(135deg, #61481C, #A47E3B); */
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   button.btn {
-    display: inline-block;  /* Ensures the button only takes the necessary width */
-    padding: 10px 20px;  /* Adds padding for better click area and aesthetics */
-    margin: 10px 0;  /* Adds some space around the button */
-    border: none;  /* Removes the default border */
-    border-radius: 5px;  /* Adds rounded corners */
-    background-color: #007bff;  /* Sets a blue background color */
-    color: #ffffff;  /* Sets the text color to white */
-    font-size: 16px;  /* Increases the font size */
-    font-weight: bold;  /* Makes the text bold */
-    cursor: pointer;  /* Changes the cursor to a pointer when hovering */
-    transition: background-color 0.3s ease;  /* Adds a transition effect for smooth background color changes */
+    display: inline-block;  
+    padding: 10px 20px;  
+    margin: 10px 0;  
+    border: none;  
+    border-radius: 5px;  
+    background-color: #007bff;  
+    color: #EDE3D1;  
+    font-size: 16px;  
+    font-weight: bold;
+    cursor: pointer;  
+    transition: background-color 0.3s ease; 
   }
   
   button.btn:hover {
-    background-color: var(--text-dark);  /* Changes the background color on hover */
+    background-color: var(--text-dark); 
   }
   
   /*---------------------------------------
@@ -95,18 +95,6 @@
     font-family: "Mulish", sans-serif;
   }
 
-
-  header::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    /* background-color: #EDE3D1; */
-    /* background: var(--gradient); */
-    z-index: -1;
-  }
 
   nav {
     position: fixed;
@@ -152,53 +140,6 @@
 
   .navbar{
     color: #e7e1d3;
-  }
- 
-  .sectionContainer__header {
-    display: grid;
-    gap: 2rem 0;
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-  }
-
-  .sectionContainer__header::before {
-    position: absolute;
-    content: "";
-    top: 0;
-    right: 0;
-    width: 100%;
-    height: 50%;
-    background: var(--gradient);
-    border-radius: 1rem 1rem 0.5rem 0.5rem;
-    z-index: -1;  
-  }
-
-  .headerContent h1{
-    position: relative;
-    isolation: isolate;
-    margin-bottom: 2rem;
-    font-size: 2.75rem;
-    font-weight: 800;
-    color: var(--text-dark);
-    line-height: 3.25rem;
-  }
-
-  .headerContent h1::before {
-    position: absolute;
-    content: "";
-    left: 0;
-    bottom: -1rem;
-    height: 4px;
-    width: 2rem;
-    background-color: var(--primary-color);
-  }
-  
-  .headerContent p {
-    margin-bottom: 2rem;
-    font-weight: 500;
-    color: var(--text-dark);
-    line-height: 1.75rem;
   }
 
 .sectionContainer {
@@ -284,22 +225,7 @@
 
 .feature-item p {
   font-size: 1rem;
-}
-
-  
-  /* .headerLinks {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .headerLinks img {
-    max-width: 125px;
-    border-radius: 5px;
-    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.1);
-  } */
-
-  
+}  
   
   @media (width > 540px) {
     .stepsGrid {
@@ -333,57 +259,6 @@
       grid-area: 1/1/2/3;
     }
   
-    /* .stepsGrid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  
-    .serviceContainer {
-      grid-template-columns: repeat(2, 1fr);
-      align-items: center;
-    }
-  
-    .experienceContent img {
-      opacity: 1;
-    }
-  
-    .experienceCard:nth-child(1) {
-      left: 5rem;
-    }
-  
-    .experienceCard:nth-child(3) {
-      left: 5rem;
-    }
-  
-    .experienceCard:nth-child(4) {
-      right: 5rem;
-    }
-  
-    .experienceCard:nth-child(6) {
-      right: 5rem;
-    }
-  
-    .downloadGrid {
-      margin-block: 4rem;
-      padding-inline: 2rem;
-      grid-template-columns: repeat(2, 1fr);
-      align-items: center;
-    }
-  
-    .downloadImage {
-      display: flex;
-      position: relative;
-      isolation: isolate;
-    }
-  
-    .downloadImage img {
-      position: absolute;
-      max-width: 300px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.2));
-    } */
-
     .table-container {
       grid-template-columns: repeat(2, 1fr);
       align-items: center
@@ -511,7 +386,7 @@
   .card-front, .card-back {
     width: 100%;
     height: 100%;
-    background-color: #2a2b38;
+    background-color: #61481C;
     background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1462889/pat.svg');
     background-position: bottom center;
     background-repeat: no-repeat;
@@ -661,7 +536,7 @@
   }
   .btn:active,
   .btn:focus{  
-    background-color: #102770;
+    background-color: #61481C;
     color: #ffeba7;
     box-shadow: 0 8px 24px 0 rgba(16,39,112,.2);
   }
