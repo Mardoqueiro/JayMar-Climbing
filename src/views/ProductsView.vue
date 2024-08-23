@@ -20,13 +20,13 @@
                         </router-link> -->
               <!-- <button class="btn btn-dark">View</button> -->
               <!-- product modal -->
-
+              <router-link :to="{ name: 'ProductDetailView', params: { id: product.prodID } }">
+              <button class="btn btn-success">View More</button>
+            </router-link>
             </div>
           </template>
           <template #cardFooter>
-            <router-link :to="{ name: 'ProductDetailView', params: { id: product.prodID } }">
-              <button class="btn btn-success">View More</button>
-            </router-link>
+            
           </template>
         </card-comp>
       </div>

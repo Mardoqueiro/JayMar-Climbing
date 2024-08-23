@@ -4,6 +4,10 @@
     <h1>Admin</h1>
 
     <h2>Products Table</h2>
+    <div class="search-filter">
+      <input v-model="searchQuery" placeholder="Search by name" />
+    </div>
+      
     <!-- <input type="text" placeholder="search"/>
     <br/>
     <label for="button">Filter by Catergory</label>
@@ -132,7 +136,8 @@
           </tr>
         </thead>
         <tbody v-if="products">
-          <tr v-for="product in products" :key="product">
+          <tr v-for="product in products" :key="product.prodID">
+
             <td>{{ product.prodID }}</td>
             <td>{{ product.prodName }}</td>
             <td>{{ product.category }}</td>
@@ -538,6 +543,10 @@ export default {
   },
   data() {
     return {
+      searchQuery: '',
+      selectedCategory: '',
+      priceSortOrder: 'asc',
+
       payload: {
         prodName: "",
         category: "",
@@ -545,6 +554,7 @@ export default {
         amount: 0,
         prodUrl: "",
       },
+      
       userPayload: {
         firstName: "",
         lastName: "",
@@ -555,6 +565,7 @@ export default {
         userProfile: "",
         userPass: "",
       },
+      categories: [],
     };
   },
 
@@ -571,6 +582,43 @@ export default {
     this.$store.dispatch("fetchUsers");
   },
   methods: {
+    searchedProducts(){
+      this.filteredProducts = this.products.filter(product => product.prodName.toLowerCase().includes(this.searchQuery.toLowerCase()));
+      this.filterProducts();
+    },
+    filteredProducts() {
+      let filtered = this.products;
+      if (this.searchQuery) {
+        filtered = filtered.filter(product =>
+          product.prodName.toLowerCase().includes(this.searchQuery.toLowerCase())
+        );
+      }
+
+      if (this.selectedCategory) {
+        filtered = filtered.filter(product =>
+          product.category === this.selectedCategory
+        );
+      }
+
+      if (this.priceSortOrder) {
+        filtered = filtered.slice().sort((a, b) => {
+          return this.priceSortOrder === 'asc'
+            ? a.amount - b.amount
+            : b.amount - a.amount;
+        });
+      }
+
+      return filtered;
+    },
+    sortProducts(propertyName) {
+      this.filteredProducts = this.filteredProducts.slice().sort((a, b) => {
+        if (this.priceSortOrder === 'asc') {
+          return a[propertyName] - b[propertyName];
+        } else {
+          return b[propertyName] - a[propertyName];
+        }
+      });
+    },
     addProduct() {
       console.log("added");
       this.$store.dispatch("addAProduct", this.payload).then(() => {
@@ -589,15 +637,6 @@ export default {
         location.reload();
       });
 
-      // const newProduct = {
-      //   prodID: this.products.length + 1,
-      //   prodName: this.$refs.prodName.value,
-      //   category: this.$refs.category.value,
-      //   quantity: this.$refs.quantity.value,
-      //   amount: this.$refs.amount.value
-      // };
-
-      // console.log('New product:', this.payload);
     },
     deleteProduct(prodID) {
       this.$store.dispatch("deleteProduct", prodID).then(() => {
@@ -665,6 +704,14 @@ export default {
         console.log(this.errors); // Handle errors appropriately
       }
     },
+  },
+  searchedProducts() {
+    if (!this.searchQuery) return this.products;
+    return this.products.filter(product => {
+      const productName = product.prodName.toLowerCase();
+      const searchQuery = this.searchQuery.toLowerCase();
+      return productName.includes(searchQuery);
+    });
   },
 };
 </script>
