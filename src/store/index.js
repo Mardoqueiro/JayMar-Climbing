@@ -16,6 +16,7 @@ export default createStore({
     product: null
   },
   getters: {
+    singleProduct:(state)=>state.product
   },
   mutations: {
     getUser(state,payload){
