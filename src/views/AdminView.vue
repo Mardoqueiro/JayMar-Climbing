@@ -23,7 +23,7 @@
 
                     <div class="newProduct">
                       <!-- ADD PRODUCT Modal -->
-                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProductModal">Add New Product</button>
+                      <button type="button" class="btn btn-primary" id="newProductbtn" data-bs-toggle="modal" data-bs-target="#addProductModal">Add New Product</button>
                       <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                           <div class="modal-content">
@@ -59,7 +59,8 @@
                     </div>
 
                                                           
-        <table class="table table-striped">
+        <div class="product-table">
+          <table class="table table-striped">
             <thead>
                 <tr>
                   <th>Product ID</th>
@@ -113,16 +114,17 @@
               </td>
             </tr>
             </tbody>
-            <div v-else>
+            <spinner-comp v-else>
               Loading
-            </div>
+            </spinner-comp>
         </table>
+        </div>
 
 
 
 
         <h2>Users Table</h2>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>
+        <button type="button" class="btn btn-primary" id="newUserbtn" data-bs-toggle="modal" data-bs-target="#addUserModal">Add New User</button>
                                                        <!-- ADD NEW USER MODAL -->
         <div class="newUser">
                       <!-- ADD USER Modal -->
@@ -165,73 +167,75 @@
                         </div>
                       </div>
         </div>
-        <table class="table table-striped">
-              <thead>
-                      <tr>
-                        <th>User ID Number</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Age</th>
-                        <th>Gender</th>
-                        <th>Role</th>
-                        <th>Email</th>
-                        <th>Profile</th>
-                        <th>Actions</th>
-                      </tr>
-              </thead>
-              <tbody v-if="users">
-                      <tr v-for="user in users" :key="user">
-                            <td>{{ user.userID }}</td>
-                            <td>{{ user.firstName }}</td>
-                            <td>{{ user.lastName }}</td>
-                            <td>{{ user.userAge }}</td>
-                            <td>{{ user.Gender }}</td>
-                            <td>{{ user.userRole }}</td>
-                            <td>{{ user.emailAdd }}</td>
-                            <td>{{ user.userProfile }}</td>                    
-                            <td>
-                                                <!-- Button trigger modal -->
-                              <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#updateUserModal${user.userID}`">Edit User</button>
-                                                <!-- EDIT USER  MODAL-->  
-                <div class="modal fade" :id="`updateUserModal${user.userID}`" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="updateUserLabel">Update User</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="admin-input">
-                        <input type="text" :placeholder="user.userID" v-model="userPayload.usersID" readonly/>
-                        <input type="text" :placeholder="user.firstName" v-model="userPayload.firstName" required/>
-                        <input type="text" :placeholder="user.lastName" v-model="userPayload.lastName" required/>
-                        <input type="number" :placeholder="user.userAge" v-model="userPayload.userAge" required/>
-                        <input type="text" :placeholder="user.Gender" v-model="userPayload.Gender" required/>
-                        <input type="text" :placeholder="user.userRole" v-model="userPayload.userRole" required/>
-                        <input type="text" :placeholder="user.emailAdd" v-model="userPayload.emailAdd" required/>
-                        <input type="text" :placeholder="user.userProfile" v-model="userPayload.userProfile" required/>
-                        <input type="text" :placeholder="user.userPass" v-model="userPayload.userPass" required/>
+        <div class="user-table"> 
+          <table class="table table-striped">
+                <thead>
+                        <tr>
+                          <th>User ID Number</th>
+                          <th>First Name</th>
+                          <th>Last Name</th>
+                          <th>Age</th>
+                          <th>Gender</th>
+                          <th>Role</th>
+                          <th>Email</th>
+                          <th>Profile</th>
+                          <th>Actions</th>
+                        </tr>
+                </thead>
+                <tbody v-if="users">
+                        <tr v-for="user in users" :key="user">
+                              <td>{{ user.userID }}</td>
+                              <td>{{ user.firstName }}</td>
+                              <td>{{ user.lastName }}</td>
+                              <td>{{ user.userAge }}</td>
+                              <td>{{ user.Gender }}</td>
+                              <td>{{ user.userRole }}</td>
+                              <td>{{ user.emailAdd }}</td>
+                              <td>{{ user.userProfile }}</td>                    
+                              <td>
+                                                  <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" :data-bs-target="`#updateUserModal${user.userID}`">Edit User</button>
+                                                  <!-- EDIT USER  MODAL-->  
+                  <div class="modal fade" :id="`updateUserModal${user.userID}`" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="updateUserLabel">Update User</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" @click.prevent="updateUser(JSON.stringify(user.userID))">Save changes</button>
+                      <div class="modal-body">
+                        <div class="admin-input">
+                          <input type="text" :placeholder="user.userID" v-model="userPayload.usersID" readonly/>
+                          <input type="text" :placeholder="user.firstName" v-model="userPayload.firstName" required/>
+                          <input type="text" :placeholder="user.lastName" v-model="userPayload.lastName" required/>
+                          <input type="number" :placeholder="user.userAge" v-model="userPayload.userAge" required/>
+                          <input type="text" :placeholder="user.Gender" v-model="userPayload.Gender" required/>
+                          <input type="text" :placeholder="user.userRole" v-model="userPayload.userRole" required/>
+                          <input type="text" :placeholder="user.emailAdd" v-model="userPayload.emailAdd" required/>
+                          <input type="text" :placeholder="user.userProfile" v-model="userPayload.userProfile" required/>
+                          <input type="text" :placeholder="user.userPass" v-model="userPayload.userPass" required/>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" @click.prevent="updateUser(JSON.stringify(user.userID))">Save changes</button>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div>
-                <button class="delete-button" v-on:click="deleteUser(user.userID)"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
-              </div>
-                            </td>
-                      </tr>
-              </tbody>
-              <div v-else>
-                Loading
-              </div>
-            
-         
-        </table>
+                <div>
+                  <button class="delete-button" v-on:click="deleteUser(user.userID)"><span class="text">Delete</span><span class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
+                </div>
+                              </td>
+                        </tr>
+                </tbody>
+                <spinner-comp v-else>
+                  Loading
+                </spinner-comp>
+              
+           
+          </table>
+        </div>
       </div>
   </div>
 </template>
@@ -240,12 +244,12 @@
 
 
 <script>
-
+import SpinnerComp from '@/components/SpinnerComp.vue';
 export default {
   // name: "AdminView",
-  // components: {
-   
-  // },
+  components: {
+   SpinnerComp
+  },
   data() {
     return {
       payload: {
@@ -391,6 +395,12 @@ async submitProductForm() {
 </script>
 
 <style>
+#newUserbtn{
+  margin: 5em 48.5em;
+}
+#newProductbtn{
+  margin: 5em 46.5em;
+}
 @media only screen and (min-width: 770px) {
   .btn {
     margin: 1em 10em;
@@ -399,7 +409,7 @@ async submitProductForm() {
 }
 .table {
   border-collapse: collapse;
-  width: 70%;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -511,5 +521,13 @@ async submitProductForm() {
 
 .delete-button:active .icon svg {
  transform: scale(0.8);
+}
+
+@media only screen and (max-width: 760px) {
+  .table {
+    border-collapse: collapse;
+    width: 90%;
+    margin: 0 2em;
+  }
 }
 </style>
