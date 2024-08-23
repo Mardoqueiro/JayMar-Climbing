@@ -2,13 +2,13 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
 
 :root {
-    --primary-color: #EDE3D1;
-    --text-dark: #0f172a;
-    --text-light: #475569;
+    --primary-color: #61481C;
+    --second-bg-color: #A47E3B;
+    --text-dark: #BF9742;
+    --text-light: #E6B325;
     --extra-light: #f2f2f2;
-    --white: #ffffff;
     --max-width: 1200px;
-    --gradient: linear-gradient(135deg, #3E4E50, #2C3E50);
+    --gradient: linear-gradient(135deg, #61481C, #A47E3B);
   }
   
   * {
@@ -26,19 +26,37 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    /* background: linear-gradient(270deg, #ff0000 , #ffa200); */
+    /* background: linear-gradient(135deg, #61481C, #A47E3B); */
   }
 
   .container{
-      max-width: 800px;   
-      margin: 0 auto;
-      padding: 20px;
-      background-color: #EDE3D1;
-      /* background: linear-gradient(90deg, #ff0000 , #ffa200); */
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 800px;   
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #EDE3D1;
+    /* background: linear-gradient(135deg, #61481C, #A47E3B); */
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
+  button.btn {
+    display: inline-block;  /* Ensures the button only takes the necessary width */
+    padding: 10px 20px;  /* Adds padding for better click area and aesthetics */
+    margin: 10px 0;  /* Adds some space around the button */
+    border: none;  /* Removes the default border */
+    border-radius: 5px;  /* Adds rounded corners */
+    background-color: #007bff;  /* Sets a blue background color */
+    color: #ffffff;  /* Sets the text color to white */
+    font-size: 16px;  /* Increases the font size */
+    font-weight: bold;  /* Makes the text bold */
+    cursor: pointer;  /* Changes the cursor to a pointer when hovering */
+    transition: background-color 0.3s ease;  /* Adds a transition effect for smooth background color changes */
+  }
+  
+  button.btn:hover {
+    background-color: var(--text-dark);  /* Changes the background color on hover */
+  }
+  
   /*---------------------------------------
   #HOME PAGE
   ----------------------------------------*/
@@ -52,23 +70,6 @@
     font-size: 2.5rem;
     font-weight: 800;
     color: var(--text-dark);
-  }
-
-  .btn {
-    padding: 0.75rem 1.5rem;
-    outline: none;
-    border: none;
-    font-size: 1rem;
-    color: var(--white);
-    background-color: var(--primary-color);
-    white-space: nowrap;
-    border-radius: 4px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  .btn:hover {
-    background-color: #0069d9;
   }
 
   .img [alt="Hpage"] {
@@ -94,9 +95,6 @@
     font-family: "Mulish", sans-serif;
   }
 
-  header {
-    position: static;
-  }
 
   header::before {
     position: absolute;
@@ -117,14 +115,43 @@
     z-index: 9;
   }
 
-  .navbar{
-    backdrop-filter: blur(30px);
-    box-shadow: 0px 0px 30px rgba(227,228,237,0.37);
-    border: 2px solid rgba(255,255,255,0.18);
+
+  /* Aligns the ul to the right */
+.navbar-nav {
+  margin-left: auto;
+  margin-right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  background-color: #E6B325;
 }
 
+/* Removes default padding for navbar items */
+.navbar-nav .nav-item {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Adjusts the brand and toggler alignment */
+.navbar-brand, .navbar-toggler {
+  padding: 0.5rem 1rem;
+}
+
+.navbar-custom {
+  background-color: #E6B325; /* Replace with your desired color */
+}
+
+/* Centers the nav items vertically */
+.nav-link {
+  padding: 0.5rem 1rem;
+}
+
+
   .navbar{
-    color: #EDE3D1;
+    color: #e7e1d3;
   }
  
   .sectionContainer__header {
@@ -173,6 +200,92 @@
     color: var(--text-dark);
     line-height: 1.75rem;
   }
+
+.sectionContainer {
+  padding: 50px 0;
+}
+
+.sectionContainer__header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f9fa;
+  padding: 40px;
+}
+
+.headerContentContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.headerImage {
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+}
+
+.headerImage img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.headerContent {
+  flex: 1;
+  max-width: 50%;
+  padding: 20px;
+  text-align: left;
+}
+
+.headerContent h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.headerContent p {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+/* Features Section */
+.sectionContainer__features .container {
+  text-align: center;
+}
+
+.sectionContainer__features h2 {
+  margin-bottom: 30px;
+}
+
+.feature-item {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.feature-item h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.feature-item p {
+  font-size: 1rem;
+}
+
   
   /* .headerLinks {
     display: flex;
@@ -194,7 +307,7 @@
     }
 
     .table-container {
-      overflow-x: auto;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
   
@@ -272,7 +385,8 @@
     } */
 
     .table-container {
-      overflow-x: auto;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center
     }
   
   }
@@ -560,62 +674,6 @@
   /*---------------------------------------
   #CARD  
 ----------------------------------------*/
-.card {
-  width: 300px; 
-  background-color: var(--second-bg-color);
-  border: 1px solid var(--main-color);
-  border-radius: 8px; 
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.3s ease; 
-  overflow: hidden; 
-  margin: 20px;
-  text-align: center;
-  position: relative;
-  display: inline-block;
-  vertical-align: top;
-  margin: 0 10px;
-  flex-basis: calc(29% - 20px);
-}
-
-.card:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
-}
-
-.card-img {
-  width: 100%;
-  height: auto;
-  border-bottom: 1px solid #ddd; /* Optional border for the image */
-}
-
-.card-content {
-  padding: 20px;
-  text-align: left;
-  position: relative;
-  z-index: 1;
-}
-
-.card-title {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: #333;
-}
-
-.card-text {
-  font-size: 1.1em;
-  color: #666;
-  line-height: 1.4;
-}
-
-.card-link {
-  display: inline-block;
-  color: #007bff; /* Link color */
-  text-decoration: none;
-  margin-top: 10px;
-}
-
-.card-link:hover {
-  text-decoration: underline; /* Underline on hover */
-}
 
 
 .hero-section {

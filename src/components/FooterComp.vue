@@ -50,7 +50,7 @@
           </div>
         </div>
         <div class="section__container footer__bar">
-          <h4>JayMar Climbing</h4>
+          <h4><a href="/">JayMar Climbing</a></h4>
             <p class="lead">JayMar Climbing &copy; <span id="currYear"></span></p>
           <ul class="footer__socials">
             <li>
@@ -109,6 +109,8 @@ export default {
     flex-direction: column;
     gap: 1rem;
     flex-wrap: wrap;
+    color: #61481C;
+
   }
   
   .footer__bar h4 {

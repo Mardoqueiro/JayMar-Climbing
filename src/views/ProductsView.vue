@@ -23,11 +23,10 @@
             <!-- <router-link :to="{ name: 'product', params: { id: product.prodID , } }">
                           <button class="btn btn-success">View</button>
                       </router-link> -->
-            <button class="btn btn-dark">Cart</button>
+            <button class="btn btn-dark justify-content-center">View</button>
           </div>
         </template>
       </card-comp>
-      <p>{{ products }}</p>
     </div>
   </div>
 </template>
@@ -52,4 +51,5 @@ export default {
   },
 };
 </script>
-<style></style>
+<style>
+</style>
