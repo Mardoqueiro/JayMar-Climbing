@@ -1,19 +1,25 @@
-# 🧗‍♂️ Rock Climbing Gear E-Commerce Store
+# 🧗‍♂️ JayMar Climbing - Rock Climbing Gear E-Commerce
 
-An adventure-driven full-stack e-commerce application for purchasing rock climbing gear. This project was developed as a group collaboration with Jayden(@jayden220) during our time at Life Choices Academy.
+**JayMar Climbing** is a full-stack, adventure-driven e-commerce application for purchasing rock climbing gear. The name “JayMar” is inspired by the first three letters of our names — **Jayden** and **Mardoquéiro**.
+
+This project was developed as a collaborative capstone at **Life Choices Academy**.
+
+---
 
 ## 🚀 Tech Stack
 
-### Frontend:
+### 🖥 Frontend
 - Vue.js
 - HTML5
 - CSS3
 - JavaScript
 
-### Backend:
+### 🛠 Backend
 - Node.js
 - Express.js
 - Nodemon
+
+---
 
 ## 💡 Features
 
@@ -21,14 +27,18 @@ An adventure-driven full-stack e-commerce application for purchasing rock climbi
 - 📦 Add to cart and checkout functionality
 - 🔐 Admin dashboard for product management
 - 💬 Contact form with backend handling
-- 📱 Fully responsive design
-- 🌐 RESTful API integration between front and back end
+- 📱 Fully responsive retro-themed design
+- 🌐 RESTful API integration between frontend and backend
+
+---
 
 ## 🤝 Collaboration
 
-This project was a joint effort:
-- **Mardoqueiro** – Frontend design, Vue.js components, backend routes, and integration
-- **Jayden** – Backend setup, API logic, and UI components
+This was a full team effort:
 
-We worked side-by-side on all parts of the application.
+- [**@mardoqueiro**](https://github.com/mardoqueiro) – Frontend design, Vue.js components, backend routes, and integration
+- [**@jayden220**](https://github.com/jayden220) – Backend setup, API logic, admin dashboard, and UI structure
 
+We worked side-by-side in all areas of the application to bring the JayMar vision to life.
+
+---
